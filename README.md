@@ -12,9 +12,16 @@ Installed [Docker Engine](https://docs.docker.com/engine/install/)
 ## Running the app
 Copy the repository
 
-Open CMD/PowerShell in the main TranslatorApp folder (has to contain docker-compose.yml)
+Open PowerShell in the main TranslatorApp folder (has to contain docker-compose.yml)
 
 Run following commands
+```bash
+dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\TranslatorApp\https\aspnetapp.pfx -p password
+dotnet dev-certs https --trust
+```
+The password is just temporary password for the sake of development. In production certs would have to be created and password take from for example a key vault.
+
+Then in the same folder run
 ```bash
 docker compose build
 docker compose up
