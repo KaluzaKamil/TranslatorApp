@@ -16,7 +16,7 @@ Open CMD/PowerShell in the main TranslatorApp folder (has to contain docker-comp
 
 Run following commands
 ```bash
-docker compsoe build
+docker compose build
 docker compose up
 ```
 
