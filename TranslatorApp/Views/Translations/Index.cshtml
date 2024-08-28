@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TranslatorApp.ViewModels.TranslationViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Translate">Translate</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TranslationText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTranslated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Translator.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TranslationText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTranslated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Translator.Name)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

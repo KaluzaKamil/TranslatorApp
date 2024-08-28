@@ -1,0 +1,52 @@
+﻿@model TranslatorApp.ViewModels.TranslationViewModel
+
+@{
+    ViewData["Title"] = "Translate";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p><h1>Translate</h1></p>
+        <form method="post" asp-controller="Translations" asp-action="Translate"
+            data-ajax="true"
+            data-ajax-method="post"
+            data-ajax-url="@Url.Page("/Translate", "Translation")"
+            data-ajax-loading="#loading"
+            data-ajax-mode="replace"
+            data-ajax-update="#updateDiv">
+            <div class="row text">
+                <div class="col-md-8 offset-2">
+                    <div class="form-group mb-3">
+                        <label asp-for="OriginalText" class="control-label"></label>
+                        <input asp-for="OriginalText" class="form-control">
+                        <span asp-validation-for="OriginalText" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="control-label">Please select translator</label>
+                        <select asp-for="TranslatorId" asp-items="ViewBag.Translators"></select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-outline-success float-end" onclick="">Translate</button>
+                        <span id="loading" style="display:none;"> <i class="fas fa-spinner fa-spin"></i></span>
+                        <a asp-controller="Translations" asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        <div class="form-group mb-3" id="updateDiv">
+            <label asp-for="TranslationText" class="control-label"></label>
+            <textarea asp-for="TranslationText" class="form-control"></textarea>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-ajax-unobtrusive@3.2.6/dist/jquery.unobtrusive-ajax.min.js"></script>
+}

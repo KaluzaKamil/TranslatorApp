@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  translatorapp:
+    image: translatorapp
+    environment:
+      - PASSWORD_ENV=password
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+      - 5000:80
+      - 5001:443 
+    build:
+      context: .
+      dockerfile: TranslatorApp/Dockerfile
+    depends_on:
+      sql:
+        condition: service_healthy
+    volumes:
+      - ~/.aspnet/https:/https:ro
+  sql:
+    image: "mcr.microsoft.com/mssql/server:latest"
+    container_name: docker-sql-server-express
+    ports:
+      - "1433:1433" 
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=MyPass@word
+      - MSSQL_PID=Express
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-C", "-Usa", "-PMyPass@word", "-Q", "select 1"]
+      interval: 5s
+      retries: 20
+
+  
+  
