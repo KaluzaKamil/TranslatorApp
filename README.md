@@ -1,6 +1,6 @@
 # TranslatorApp
 
-TranslatorApp is a dockerized demo ASP.NET Core MVC application which uses [external API](https://funtranslations.com/api/) to translate texts and save transslations in a dockerized database created on Sql Express server. 
+TranslatorApp is a dockerized demo ASP.NET Core MVC application which uses [external API](https://funtranslations.com/api/) to translate texts and save translations in a dockerized database created on Sql Express server. 
 It also supports adding additonal translator API links from mentioned API.
 
 ## Requirements
