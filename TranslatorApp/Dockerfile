@@ -9,6 +9,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+RUN dotnet dev-certs https
 COPY ["TranslatorApp/TranslatorApp.csproj", "TranslatorApp/"]
 RUN dotnet restore "./TranslatorApp/TranslatorApp.csproj"
 COPY . .
