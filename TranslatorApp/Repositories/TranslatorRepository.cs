@@ -89,7 +89,13 @@ namespace TranslatorApp.Repositories
             var translators = await _context.Translators.ToListAsync();
             var translatorsViewModels = new List<TranslatorViewModel>();
 
-            translators.ForEach(t => translatorsViewModels.Add(new TranslatorViewModel { Id = t.Id, Name = t.Name, ApiUri = t.ApiUri }));
+            translators.ForEach(t => translatorsViewModels.Add(new TranslatorViewModel 
+            { 
+                Id = t.Id, 
+                Name = t.Name, 
+                ApiUri = t.ApiUri,
+                ApiUriParameters = t.ApiUriParameters 
+            }));
 
             return translatorsViewModels;
         }
@@ -105,6 +111,7 @@ namespace TranslatorApp.Repositories
                 Id = translator.Id,
                 Name = translator.Name,
                 ApiUri = translator.ApiUri,
+                ApiUriParameters = translator.ApiUriParameters
             };
         }
 
@@ -113,7 +120,8 @@ namespace TranslatorApp.Repositories
             var translator = new Translator
             {
                 Name = translatorViewModel.Name,
-                ApiUri = translatorViewModel.ApiUri
+                ApiUri = translatorViewModel.ApiUri,
+                ApiUriParameters = translatorViewModel.ApiUriParameters
             };
 
             _context.Add(translator);
@@ -126,6 +134,7 @@ namespace TranslatorApp.Repositories
 
             translator.Name = translatorViewModel.Name;
             translator.ApiUri = translatorViewModel.ApiUri;
+            translator.ApiUriParameters = translatorViewModel.ApiUriParameters;
 
             _context.Update(translator);
             return await _context.SaveChangesAsync();

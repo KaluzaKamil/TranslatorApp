@@ -23,14 +23,16 @@ namespace TranslatorAppTests.Tests.Unit
             {
                 Id = 1,
                 Name = "test1",
-                ApiUri = "testApiUri1"
+                ApiUri = "testApiUri1",
+                ApiUriParameters = "testApiUriParameters"
             });
 
             translators.Add(new TranslatorViewModel()
             {
                 Id = 2,
                 Name = "test2",
-                ApiUri = "testApiUri2"
+                ApiUri = "testApiUri2",
+                ApiUriParameters = "testApiUriParameters"
             });
 
             return translators;
@@ -63,7 +65,10 @@ namespace TranslatorAppTests.Tests.Unit
             mockRepo.Setup(repo => repo.GetTranslatorAsync(1))
                 .ReturnsAsync(new TranslatorViewModel 
                 {
-                    Id = 1, Name = "mockTranslator", ApiUri = "mockApiUri"
+                    Id = 1, 
+                    Name = "mockTranslator", 
+                    ApiUri = "mockApiUri",
+                    ApiUriParameters = "mockApiUriParameters"
                 });
             var controller = new TranslatorsController(mockRepo.Object);
 
@@ -119,7 +124,8 @@ namespace TranslatorAppTests.Tests.Unit
             var newTranslator = new TranslatorViewModel()
             {
                 Name = "newTranslator",
-                ApiUri = "newTranslatorApiUri"
+                ApiUri = "newTranslatorApiUri",
+                ApiUriParameters = "newApiUriParameters"
             };
 
             //Act
@@ -146,7 +152,8 @@ namespace TranslatorAppTests.Tests.Unit
             {
                 Id = 1,
                 Name = "editedTranslator",
-                ApiUri = "editedTranslatorApiUri"
+                ApiUri = "editedTranslatorApiUri",
+                ApiUriParameters = "editedApiUriParameters"
             };
 
             //Act
@@ -169,7 +176,8 @@ namespace TranslatorAppTests.Tests.Unit
                 {
                     Id = 1,
                     Name = "newTranslator",
-                    ApiUri = "newTranslatorApiUri"
+                    ApiUri = "newTranslatorApiUri",
+                    ApiUriParameters = "newApiUriParameters"
                 });
 
             var controller = new TranslatorsController(mockRepo.Object);
@@ -192,7 +200,8 @@ namespace TranslatorAppTests.Tests.Unit
                 {
                     Id = 1,
                     Name = "newTranslator",
-                    ApiUri = "newTranslatorApiUri"
+                    ApiUri = "newTranslatorApiUri",
+                    ApiUriParameters = "newApiUriParameters"
                 });
             mockRepo.Setup(repo => repo.DeleteTranslatorAsync(1))
                 .ReturnsAsync(1)

@@ -34,7 +34,8 @@ namespace TranslatorAppTests.Tests.Unit
                 {
                     Id = 1,
                     Name = "testTranslator",
-                    ApiUri = "testApiUri"
+                    ApiUri = "testApiUri",
+                    ApiUriParameters = "testApiUriParameters"
                 }
             });
 
@@ -49,7 +50,8 @@ namespace TranslatorAppTests.Tests.Unit
                 {
                     Id = 1,
                     Name = "testTranslator",
-                    ApiUri = "testApiUri"
+                    ApiUri = "testApiUri",
+                    ApiUriParameters = "testApiUriParameters"
                 }
             });
 
@@ -63,14 +65,16 @@ namespace TranslatorAppTests.Tests.Unit
             {
                 Id = 1,
                 Name = "test1",
-                ApiUri = "testApiUri1"
+                ApiUri = "testApiUri1",
+                ApiUriParameters = "testApiUriParameters1"
             });
 
             translators.Add(new TranslatorViewModel()
             {
                 Id = 2,
                 Name = "test2",
-                ApiUri = "testApiUri2"
+                ApiUri = "testApiUri2",
+                ApiUriParameters = "testApiUriParameters2"
             });
 
             return translators;
@@ -116,7 +120,8 @@ namespace TranslatorAppTests.Tests.Unit
                     {
                         Id = 1,
                         Name = "testTranslator",
-                        ApiUri = "testApiUri"
+                        ApiUri = "testApiUri",
+                        ApiUriParameters = "testApiUriParameters"
                     }
                 });
             var controller = new TranslationsController(mockRepo.Object, mockLogger.Object, mockApiCaller.Object);
@@ -184,10 +189,11 @@ namespace TranslatorAppTests.Tests.Unit
                 {
                     Id = 1,
                     Name = "testTranslator",
-                    ApiUri = "testApiUri"
+                    ApiUri = "testApiUri",
+                    ApiUriParameters = "testApiUriParameters"
                 })
                 .Verifiable();
-            mockApiCaller.Setup(caller => caller.GetTranslationAsync("Hello", "testApiUri"))
+            mockApiCaller.Setup(caller => caller.GetTranslationAsync("Hello", "testApiUri", "testApiUriParameters"))
                 .ReturnsAsync("translated")
                 .Verifiable();
             mockValidator.Setup(validator => validator.Validate(It.IsAny<ActionContext>(),
@@ -231,7 +237,8 @@ namespace TranslatorAppTests.Tests.Unit
                     {
                         Id = 1,
                         Name = "testTranslator",
-                        ApiUri = "testApiUri"
+                        ApiUri = "testApiUri",
+                        ApiUriParameters = "testApiUriParameters"
                     }
                 });
             var controller = new TranslationsController(mockRepo.Object, mockLogger.Object, mockApiCaller.Object);
@@ -263,7 +270,8 @@ namespace TranslatorAppTests.Tests.Unit
                     {
                         Id = 1,
                         Name = "testTranslator",
-                        ApiUri = "testApiUri"
+                        ApiUri = "testApiUri",
+                        ApiUriParameters = "testApiUriParameters"
                     }
                 });
             mockRepo.Setup(repo => repo.DeleteTranslationAsync(1))

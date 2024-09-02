@@ -75,14 +75,17 @@ namespace TranslatorApp.Controllers
 
             var translator = await _repository.GetTranslatorAsync(translationViewModel.TranslatorId);
 
-            translationViewModel.TranslationText = await _apiCaller.GetTranslationAsync(translationViewModel.OriginalText, translator.ApiUri);
+            translationViewModel.TranslationText = await _apiCaller.GetTranslationAsync(translationViewModel.OriginalText, 
+                                                                                        translator.ApiUri, 
+                                                                                        translator.ApiUriParameters);
             
 
             translationViewModel.Translator = new TranslatorViewModel 
             {
                 Id = translator.Id, 
                 Name = translator.Name, 
-                ApiUri = translator.ApiUri 
+                ApiUri = translator.ApiUri,
+                ApiUriParameters = translator.ApiUriParameters,
             };
 
             ModelState.Clear();

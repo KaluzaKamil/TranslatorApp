@@ -11,7 +11,7 @@ namespace TranslatorApp.ApiCaller
         {
             _logger = logger;
         }
-        public async Task<string> GetTranslationAsync(string originalText, string apiUri)
+        public async Task<string> GetTranslationAsync(string originalText, string apiUri, string apiUriParameters)
         {
             var apiResponse = new ApiResponseModel();
             using (var client = new HttpClient())
@@ -19,7 +19,9 @@ namespace TranslatorApp.ApiCaller
                 client.BaseAddress = new Uri(apiUri);
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
 
-                var response = await client.GetAsync($"?text={originalText}");
+                var transformedParameters = apiUriParameters.Replace("<original_text>", originalText);
+
+                var response = await client.GetAsync(transformedParameters);
 
                 var responseBody = await response.Content.ReadAsStringAsync();
 
