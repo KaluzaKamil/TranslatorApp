@@ -22,7 +22,7 @@ Run following commands
 dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\TranslatorApp\aspnetapp.pfx -p password
 dotnet dev-certs https --trust
 ```
-The password is just temporary password for the sake of development. In production certs would have to be created and password take from for example a key vault.
+The password is just temporary password for the sake of development. In production certs would have to be created and password taken from for example a key vault.
 
 Then in the same folder run
 ```bash
